@@ -1,4 +1,4 @@
-resource "aws_security_group" "mern_sg" {
+resource "aws_security_group" "this" {
   name        = "mern_stack_demo_sg"
   vpc_id      = aws_vpc.practvpc_002.id
 

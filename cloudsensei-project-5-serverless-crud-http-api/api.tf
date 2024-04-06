@@ -1,12 +1,3 @@
-# This Terraform code defines AWS API Gateway resources to 
-# create, read, update and delete items using HTTP methods. 
-# It creates an API Gateway HTTP API, integration with 
-# AWS Lambda functions, routes, and a deployment stage. 
-# The API supports GET, POST, PUT and DELETE HTTP methods 
-# for different endpoints, and all endpoints use the 
-# AWS_PROXY integration type with the Internet connection type. 
-# The code also enables auto-deployment of the API Gateway stage upon updates.
-
 resource "aws_apigatewayv2_api" "crud_http_api_gw" {
   name          = "crud-http-api"
   protocol_type = "HTTP"
@@ -86,9 +77,4 @@ resource "aws_apigatewayv2_stage" "crud_api_deploy_stage" {
   api_id      = aws_apigatewayv2_api.crud_http_api_gw.id
   auto_deploy = true
   name        = "$default"
-}
-
-output "api_endpoint" {
-  value       = aws_apigatewayv2_api.crud_http_api_gw.api_endpoint
-  description = "Test API endpoint with this address"
 }

@@ -2,8 +2,8 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: $EKS_CLUSTER_NAME
-  region: $AWS_REGION
+  name: eks-workshop
+  region: us-east-1
 
 fargateProfiles:
 - name: checkout-profile
@@ -12,7 +12,7 @@ fargateProfiles:
     labels:
       fargate: 'yes'
   subnets:
-  - $PRIVATE_SUBNET_1
-  - $PRIVATE_SUBNET_2
-  - $PRIVATE_SUBNET_3
-  podExecutionRoleARN: $FARGATE_IAM_PROFILE_ARN
+  - subnet-0a6820233c142ff05
+  - subnet-0737f497087aa48d4
+  - subnet-01bb1241ef43c9508
+  podExecutionRoleARN: arn:aws:iam::839399074955:role/eks-workshop-fargate
