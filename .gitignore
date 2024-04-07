@@ -1,7 +1,8 @@
-.terraform
-.git
-.lock
-.hcl
-.tfvars
-.tf
-.tfplan
+*.terraform*
+*.git*
+*.lock*
+*.hcl*
+*.tfvars*
+*.tf*
+*.tfplan*
+*.backup*
