@@ -4,3 +4,4 @@
 .hcl
 .tfvars
 .tf
+.tfplan
