@@ -1,0 +1,6 @@
+.terraform
+.git
+.lock
+.hcl
+.tfvars
+.tf

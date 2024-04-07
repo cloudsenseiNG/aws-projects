@@ -12,6 +12,11 @@ module "eks_blueprints_addons" {
     wait = true
   }
 
+  enable_metrics_server = true
+  metrics_server        = {
+    wait = true
+  }
+
   enable_karpenter = true
   karpenter_enable_spot_termination          = true
   karpenter_enable_instance_profile_creation = true
