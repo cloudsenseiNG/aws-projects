@@ -1,4 +1,19 @@
 locals {
+
+  cw_log_group_name = "eks-cloudwatch-log-group"
+  addon_context = {
+  aws_caller_identity_account_id = data.aws_caller_identity.current.account_id
+  aws_caller_identity_arn        = data.aws_caller_identity.current.arn
+  aws_eks_cluster_endpoint       = module.eks.cluster_endpoint
+  aws_partition_id               = data.aws_partition.current.partition
+  aws_region_name                = data.aws_region.current.name
+  eks_cluster_id                 = module.eks.cluster_name
+  eks_oidc_issuer_url            = module.eks.cluster_oidc_issuer_url
+  eks_oidc_provider_arn          = module.eks.oidc_provider_arn
+  tags                           = {}
+  irsa_iam_role_path             = "/"
+  irsa_iam_permissions_boundary  = ""
+  }
   tags = {
     created-by = "eks-workshop-v2"
     env        = var.cluster_name
@@ -57,4 +72,12 @@ module "eks" {
   tags = merge(local.tags, {
     "karpenter.sh/discovery" = var.cluster_name
   })
+}
+
+module "aws-for-fluentbit" {
+  source = "github.com/aws-ia/terraform-aws-eks-blueprints?ref=v4.32.1//modules/kubernetes-addons/aws-for-fluentbit"
+
+  cw_log_group_name = local.cw_log_group_name
+
+  addon_context = local.addon_context
 }

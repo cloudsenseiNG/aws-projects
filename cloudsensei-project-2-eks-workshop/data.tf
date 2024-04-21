@@ -4,6 +4,12 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+data "aws_caller_identity" "current" {}
+
+data "aws_eks_cluster_auth" "this" {
+  name = module.eks.cluster_name
+}
+
 data "aws_iam_policy_document" "cwlogs" {
   statement {
     sid       = ""
@@ -20,6 +26,7 @@ data "aws_iam_policy_document" "cwlogs" {
 }
 
 data "aws_partition" "current" {}
+
 # data "aws_vpc" "selected" {
 #   tags = {
 #     created-by = "eks-workshop-v2"
