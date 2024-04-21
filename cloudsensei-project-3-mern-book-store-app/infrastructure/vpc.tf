@@ -1,24 +1,19 @@
 //This specifies the vpc environment
-resource "aws_vpc" "practvpc_002" {
+resource "aws_vpc" "vpc" {
     cidr_block = "10.2.0.0/16"
 }
 //This deploys the public subnet
-resource "aws_subnet" "lb_subnet_a" {
-  vpc_id     = "${aws_vpc.practvpc_002.id}"
+resource "aws_subnet" "public" {
+  vpc_id     = "${aws_vpc.vpc.id}"
   cidr_block = "10.2.1.0/24"
   availability_zone = "us-east-1a"
 }
 
-resource "aws_subnet" "lb_subnet_b" {
-  vpc_id     = "${aws_vpc.practvpc_002.id}"
-  cidr_block = "10.2.2.0/24"
-  availability_zone = "us-east-1b"
-}
 
 
 //This creates the internet gateway for the VPC
-resource "aws_internet_gateway" "my_ig" {
-  vpc_id = "${aws_vpc.practvpc_002.id}"
+resource "aws_internet_gateway" "this" {
+  vpc_id = aws_vpc.vpc.id
 }
 
 resource "aws_route_table" "lb_route" {
