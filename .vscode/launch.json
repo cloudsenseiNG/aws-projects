@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/cloudsensei-project-3-mern-book-store-app/frontend/package.json",
+                "localRoot": "${workspaceFolder}/cloudsensei-project-3-mern-book-store-app/frontend"
+            }
+        }
+    ]
+}

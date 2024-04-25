@@ -1,9 +1,9 @@
-resource "aws_ecs_task_definition" "my_ecs_task" {
-  family                   = "ecs-task-def"
+resource "aws_ecs_task_definition" "task" {
+  family                   = "mern-task-def"
   network_mode             = "awsvpc"
   cpu                      = "1024"
   memory                   = "3072" 
-  execution_role_arn       = aws_iam_role.ecs_execution_role.arn
+  execution_role_arn       = aws_iam_role.role.arn
   requires_compatibilities = ["FARGATE"]
   runtime_platform {
     operating_system_family = "LINUX"
@@ -33,23 +33,22 @@ resource "aws_ecs_task_definition" "my_ecs_task" {
 }
 
 
-resource "aws_ecs_service" "mern_service" {
-  name            = "ecs-service"
-  cluster         = aws_ecs_cluster.mern_ecs_cluster.arn
-  task_definition = aws_ecs_task_definition.my_ecs_task.arn
+resource "aws_ecs_service" "service" {
+  name            = "frontend-service"
+  cluster         = aws_ecs_cluster.cluster.arn
+  task_definition = aws_ecs_task_definition.task.arn
   desired_count   = 1
   launch_type = "FARGATE"
 
   network_configuration {
-  subnets = [aws_subnet.lb_subnet_a.id]
-  security_groups = [aws_security_group.mern_sg.id]
-  assign_public_ip = true
+  subnets = [aws_subnet.private[0].id, aws_subnet.private[1].id]
+  security_groups = [aws_security_group.this.id]
   }
 
   load_balancer {
-    container_name = "mern-backend"
-    container_port = 5000
-    target_group_arn = aws_lb_target_group.mern_tg.arn
+    container_name = "mern-frontend"
+    container_port = 80
+    target_group_arn = aws_lb_target_group.this.arn
 
   }
 

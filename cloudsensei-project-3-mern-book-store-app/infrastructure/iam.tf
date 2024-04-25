@@ -1,6 +1,6 @@
-resource "aws_iam_role_policy" "ecs_execution_role_policy" {
+resource "aws_iam_role_policy" "policy" {
   name = "ECSTaskDefExecutionRolePolicy"
-  role = aws_iam_role.ecs_execution_role.id
+  role = aws_iam_role.role.id
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -20,7 +20,7 @@ resource "aws_iam_role_policy" "ecs_execution_role_policy" {
 })
 }
 
-resource "aws_iam_role" "ecs_execution_role" {
+resource "aws_iam_role" "role" {
   name = "ECSTaskDefExecutionRole"
 
   assume_role_policy = jsonencode({

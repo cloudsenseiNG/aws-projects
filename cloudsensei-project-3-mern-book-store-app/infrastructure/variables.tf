@@ -32,3 +32,18 @@ variable "bucket" {
   type        = string
   description = "The name of the S3 bucket."
 }
+
+variable "cidr_block" {
+  type = string
+  default = "10.2.0.0/16"
+}
+
+variable "public_cidr_blocks" {
+  type = list(string)
+  default = [ "10.2.1.0/24", "10.2.2.0/24" ]
+}
+
+variable "private_cidr_blocks" {
+  type = list(string)
+  default = [ "10.2.3.0/24", "10.2.4.0/24" ]
+}
