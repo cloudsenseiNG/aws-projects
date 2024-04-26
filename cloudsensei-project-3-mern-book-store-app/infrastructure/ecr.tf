@@ -1,3 +1,3 @@
-resource "aws_ecr_repository" "ecr_repo" {
+resource "aws_ecr_repository" "this" {
   name = "ecr-repo"
 }

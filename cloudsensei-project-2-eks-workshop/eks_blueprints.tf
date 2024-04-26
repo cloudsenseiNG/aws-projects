@@ -2,8 +2,6 @@ module "eks_blueprints_addons" {
   source = "aws-ia/eks-blueprints-addons/aws"
   version = "1.12.0"
 
-  # Read about eks cluster controllers and explain what commenting this controllers do on Terraform
-
   # enable_aws_load_balancer_controller = true
   # aws_load_balancer_controller = {
   #   wait = true

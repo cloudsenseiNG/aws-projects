@@ -20,7 +20,7 @@ EOF
 
 resource "aws_iam_role_policy" "policy" {
   name = "crud-api-exec-role-policy"
-  role = aws_iam_role.lambda_exec.id
+  role = aws_iam_role.role.id
 
   policy = <<EOF
 {
