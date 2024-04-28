@@ -63,3 +63,10 @@ data "aws_iam_policy_document" "fargate_assume_role_policy" {
 data "aws_ecrpublic_authorization_token" "token" {
   provider = aws.virginia
 }
+
+# Create ZIP file with Lambda code
+data "archive_file" "lambda" {
+  type        = "zip"
+  source_file = "${path.module}/lambda/logs-to-opensearch.js"
+  output_path = "${path.module}/function.zip"
+}
