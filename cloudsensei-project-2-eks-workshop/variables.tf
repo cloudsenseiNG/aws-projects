@@ -21,42 +21,27 @@ variable "vpc_cidr" {
   default     = "10.42.0.0/16"
 }
 
-# variable "bucket" {
-#   type        = string
-#   description = "The name of the S3 bucket."
+# tflint-ignore: terraform_unused_declarations
+# variable "cluster_security_group_id" {
+#   description = "EKS cluster security group ID"
+#   type        = any
 # }
 
-# variable "backend_bucket_key" {
-#   type        = string
-#   description = "The key in the backend bucket."
+# # tflint-ignore: terraform_unused_declarations
+# variable "addon_context" {
+#   description = "Addon context that can be passed directly to blueprints addon modules"
+#   type        = any
 # }
 
-# variable "region" {
-#   type        = string
-#   description = "The AWS region where resources will be provisioned."
+# tflint-ignore: terraform_unused_declarations
+# variable "tags" {
+#   description = "Tags to apply to AWS resources"
+#   type        = any
 # }
 
-# variable "dynamodb_table" {
-#   type        = string
-#   description = "The name of the DynamoDB table."
-# }
+# tflint-ignore: terraform_unused_declarations
+variable "resources_precreated" {
+  description = "Have expensive resources been created already"
+  type        = bool
+}
 
-# variable "billing_mode" {
-#   type        = string
-#   description = "The billing mode for DynamoDB (e.g., PROVISIONED, PAY_PER_REQUEST)."
-# }
-
-# variable "hash_key" {
-#   type        = string
-#   description = "The hash key for the DynamoDB table."
-# }
-
-# variable "attribute_name" {
-#   type        = string
-#   description = "The name of the attribute in the DynamoDB table."
-# }
-
-# variable "attribute_type" {
-#   type        = string
-#   description = "The type of the attribute in the DynamoDB table."
-# }

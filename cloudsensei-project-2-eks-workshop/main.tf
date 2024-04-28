@@ -12,8 +12,9 @@ locals {
   eks_oidc_provider_arn          = module.eks.oidc_provider_arn
   tags                           = {}
   irsa_iam_role_path             = "/"
-  irsa_iam_permissions_boundary  = ""
+  irsa_iam_permissions_boundary  = ""  
   }
+  
   tags = {
     created-by = "eks-workshop-v2"
     env        = var.cluster_name
@@ -80,4 +81,12 @@ module "aws-for-fluentbit" {
   cw_log_group_name = local.cw_log_group_name
 
   addon_context = local.addon_context
+}
+
+module "preprovision" {
+  source = "./preprovision"
+  count  = var.resources_precreated ? 0 : 1
+
+  eks_cluster_id = var.cluster_name
+  tags           = local.tags
 }
