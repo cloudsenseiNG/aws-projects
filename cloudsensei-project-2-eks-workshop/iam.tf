@@ -32,7 +32,7 @@ resource "random_string" "suffix" {
 
 # Lambda execution role for OpenSearch exporter
 resource "aws_iam_role" "lambda_execution_role" {
-  name = "${local.lambda_function_name}-Role-${random_string.suffix.result}"
+  name = "${module.eks.cluster_name}-control-plane-logs-Role-${random_string.suffix.result}"
 
   # Trust relationship 
   assume_role_policy = jsonencode({
@@ -81,4 +81,21 @@ resource "aws_iam_role" "lambda_execution_role" {
       ]
     })
   }
+}
+
+resource "aws_iam_policy" "grafana" {
+  name = "${module.eks.cluster_name}-grafana-other"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "aps:*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
