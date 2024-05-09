@@ -24,3 +24,18 @@ export KARP_ROLE="${module.eks_blueprints_addons.karpenter.node_iam_role_name}"
 export KARP_ARN="${module.eks_blueprints_addons.karpenter.node_iam_role_arn}"
 EOF
 }
+
+output "lambda_arn" {
+  value = aws_lambda_function.eks_control_plane_logs_to_opensearch.arn
+}
+
+output "lambda_role_arn" {
+  value = aws_iam_role.lambda_execution_role.arn
+}
+
+output "environment_variables" {
+  description = "Environment variables to be added to the IDE shell"
+  value = {
+    ADOT_IAM_ROLE_CI = module.iam_assumable_role_adot_ci.iam_role_arn
+  }
+}

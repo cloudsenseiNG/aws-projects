@@ -40,8 +40,8 @@ variable "vpc_cidr" {
 # }
 
 # tflint-ignore: terraform_unused_declarations
-variable "resources_precreated" {
-  description = "Have expensive resources been created already"
-  type        = bool
-}
+# variable "resources_precreated" {
+#   description = "Have expensive resources been created already"
+#   type        = bool
+# }
 

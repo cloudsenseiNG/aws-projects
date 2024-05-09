@@ -70,3 +70,7 @@ data "archive_file" "lambda" {
   source_file = "${path.module}/lambda/logs-to-opensearch.js"
   output_path = "${path.module}/function.zip"
 }
+
+data "http" "kubecost_values" {
+  url = "https://raw.githubusercontent.com/kubecost/cost-analyzer-helm-chart/v1.106.3/cost-analyzer/values-eks-cost-monitoring.yaml"
+}
